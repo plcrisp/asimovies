@@ -4,8 +4,14 @@ export default {
     "./src/**/*.{html,ts}"
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'black': '#000000',
+      },
+    },
   },
   plugins: [],
 }
+
+
 
