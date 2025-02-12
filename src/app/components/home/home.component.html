@@ -1,1 +1,90 @@
-<p>home works!</p>
+<div class="page">
+    <app-header></app-header>
+  
+    <body>
+        <div class="search">
+            <div class="search-title">AsiMovies</div>
+            <div class="search-bar">
+              <input
+                type="text"
+                placeholder="Pesquisar Filme..."
+                class="search-input"
+                [(ngModel)]="searchQuery"
+                (input)="filterMovies()"
+              >
+              <button type="button" class="search-button" (click)="filterMovies()">🔍</button>
+            </div>
+            
+            <button type="button" class="add-button" (click)="toggleAddMovieModal()">Adicionar Filme</button>
+        </div>
+  
+        <div class="cards">
+          <button 
+            type="button" 
+            class="scroll" 
+            (click)="showPrevious()"
+            [ngClass]="{ 'disabled': currentOffset <= 0 }">
+            &lt;
+          </button>
+        
+          <div *ngFor="let movie of displayedMovies" class="card group">
+            <!-- Icone de tres pontinhos (aparece ao passar o mouse) -->
+            <div class="options">
+              <div class="relative">
+                <button class="menu-button">&#x22EE;</button>
+        
+                <!-- Dropdown (oculto até que seja clicado) -->
+                <div class="dropdown">
+                  <ul>
+                    <li>
+                      <button class="dropdown-item">
+                        <i class="fas fa-trash-alt"></i> Excluir
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+        
+            <!-- Conteúdo do card -->
+            <div class="photo">
+              <img [src]="movie.photoPath" alt="Card image">
+            </div>
+  
+            <div class="card-content">
+              <h2>{{ movie.title }}</h2>
+              <p>{{ movie.analysis }}</p>
+  
+              <!-- Avaliação com Estrelas -->
+              <div class="rating">
+                <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+                  <i class="fa-star" 
+                    [class.fas]="star <= movie.rating" 
+                    [class.far]="star > movie.rating"></i>
+                </ng-container>
+              </div>
+            </div>
+  
+            <div class="footer">
+              <img src="../../../assets/logos/asimoviesWhite.png" alt="logoAsiMovies">
+            </div>
+          </div>
+        
+          <button 
+            type="button" 
+            class="scroll" 
+            (click)="showNext()"
+            [ngClass]="{ 'disabled': currentOffset + limit >= movies.length }">
+            &gt;
+          </button>
+        </div>
+  
+  
+    </body>
+    
+    <app-footer></app-footer>
+  
+    <app-add-movie *ngIf="showAddMovieModal" (closeModal)="toggleAddMovieModal()"></app-add-movie>
+  </div>
+  
+  
