@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { UserInterface } from '../interfaces/user-interface';
 import { Observable } from 'rxjs';
+import { compilePipeFromMetadata } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -10,27 +11,27 @@ export class DatabaseService {
 
   constructor(private db: AngularFirestore) { }
 
-  addDocument<T>(collection: string, data: T): Promise<any>{
-    return this.db.collection<T>(collection).add(data);
+  addDocument(collection: string, data: any): Promise<any>{
+    return this.db.collection(collection).add(data);
   }
 
-  getDocument<T>(collection: string, id: string): Observable<T | undefined>{
-    return this.db.collection<T>(collection).doc(id).valueChanges();
+  getDocument(collection: string, id: string): Observable<any | undefined>{
+    return this.db.collection(collection).doc(id).valueChanges();
   }
 
-  getCollection<T>(collection: string): Observable<T[]>{
-    return this.db.collection<T>(collection).valueChanges({ idField: 'id'});
+  getCollection(collection: string): Observable <any[]>{
+    return this.db.collection(collection).valueChanges({idField: 'id'})
   }
 
-  getCollectionWithFilter<T>(collection: string, field: string, value: any): Observable<T[]>{
-    return this.db.collection<T>(collection, ref => ref.where(field, '==', value)).valueChanges({ idField: 'id'});
+  getCollectionWithFilter(collection: string, field: string, value: string): Observable <any[]>{
+    return this.db.collection(collection, ref => ref.where(field, '==', value)).valueChanges({idField: 'id'});
   }
 
-  //updateDocument(){
+  //updateDocument(collection: string){
 
   //}
 
-  deleteDocument(collection: string, id:string): Promise<void>{
+  deleteDocument(collection: string, id: string): Promise<void>{
     return this.db.collection(collection).doc(id).delete();
   }
 }
