@@ -1,15 +1,17 @@
 /*
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UserInterface } from '../../interfaces/user-interface';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit, OnDestroy{
   showLogoutModal: boolean=false;
 
   frases: string[] = [
@@ -25,6 +27,9 @@ export class HeaderComponent {
 
   dropdownAberto: boolean = false;
 
+  private subscription: Subscription | undefined;
+
+
 
   constructor(
     private router: Router,
@@ -32,10 +37,16 @@ export class HeaderComponent {
     ) { }
 
   ngOnInit(){
-    this.auth.getUserData().subscribe((user: UserInterface) =>{
+    this.subscription = this.auth.getUserData().subscribe((user: UserInterface) =>{
       this.user = user;
     })
     this.exibirFraseAleatoria();
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
   toggleDropdown() {
@@ -64,5 +75,6 @@ export class HeaderComponent {
     console.log('Usuário deslogado.');
   }
 }
+
 
 */
