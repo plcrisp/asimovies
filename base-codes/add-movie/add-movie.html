@@ -37,13 +37,13 @@
               <div class="mb-8 mt-4">
                 <label class="block text-sm font-medium">Nota*</label>
                 <div class="flex justify-center space-x-1 text-gray-400 cursor-pointer mt-2" id="starRating">
-                    <i class="fa fa-star text-2xl" data-value="1"></i>
-                    <i class="fa fa-star text-2xl" data-value="2"></i>
-                    <i class="fa fa-star text-2xl" data-value="3"></i>
-                    <i class="fa fa-star text-2xl" data-value="4"></i>
-                    <i class="fa fa-star text-2xl" data-value="5"></i>
+                  <i class="fa fa-star text-2xl" [class.text-yellow-500]="categoryForm.value.rating >= 1"></i>
+                  <i class="fa fa-star text-2xl" [class.text-yellow-500]="categoryForm.value.rating >= 2"></i>
+                  <i class="fa fa-star text-2xl" [class.text-yellow-500]="categoryForm.value.rating >= 3"></i>
+                  <i class="fa fa-star text-2xl" [class.text-yellow-500]="categoryForm.value.rating >= 4"></i>
+                  <i class="fa fa-star text-2xl" [class.text-yellow-500]="categoryForm.value.rating >= 5"></i>
                 </div>
-                <input type="hidden" id="rating" name="rating" value="0">
+                <input type="hidden" id="rating" formControlName="rating" />
               </div>
 
               <!-- Análise -->
