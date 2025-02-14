@@ -54,20 +54,6 @@ body {
             }
         }
 
-        .dropdown {
-          position: absolute;
-          top: 105%;
-          left: 0;
-          width: 500px;
-          background-color: white;
-          border: 1px solid #ccc;
-          border-radius: 10px;
-          z-index: 1000;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-          max-height: 400px;
-          overflow-y: auto;
-        }
-
         .add-button {
             background-color: white;
             font-weight: 600;
@@ -163,7 +149,7 @@ body {
           justify-content: center;
         
           .fa-star {
-            color: #FFEE8C;
+            color: #eab308;
             margin-right: 4px;
             font-size: 20px;
             transition: transform 0.3s;
